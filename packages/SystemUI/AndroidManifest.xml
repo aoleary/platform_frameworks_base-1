@@ -292,6 +292,8 @@
     <!-- Screenshot tile -->
     <uses-permission android:name="android.permission.ACCESS_SURFACE_FLINGER" />
 
+    <protected-broadcast android:name="android.intent.action.SCREEN_STATE_SERVICE_UPDATE" />
+
     <application
         android:name=".SystemUIApplication"
         android:persistent="true"
@@ -793,5 +795,11 @@
             </intent-filter>
         </receiver>
 
+        <service android:name=".aosip.screenstate.ScreenStateService"
+                android:exported="true" >
+            <intent-filter>
+               <action android:name="android.intent.action.SCREEN_STATE_SERVICE_UPDATE"/>
+            </intent-filter>
+        </service>
     </application>
 </manifest>

@@ -20,6 +20,9 @@ import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
+import android.os.Handler;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -30,6 +33,8 @@ import android.util.Log;
 public class BootReceiver extends BroadcastReceiver {
     private static final String TAG = "SystemUIBootReceiver";
 
+    private Context mContext;
+
     @Override
     public void onReceive(final Context context, Intent intent) {
         try {
@@ -38,6 +43,13 @@ public class BootReceiver extends BroadcastReceiver {
             if (Settings.Global.getInt(res, Settings.Global.SHOW_CPU_OVERLAY, 0) != 0) {
                 Intent cpuinfo = new Intent(context, com.android.systemui.CPUInfoService.class);
                 context.startService(cpuinfo);
+            }
+
+            // start the screen state service if activated
+            if (Settings.System.getIntForUser(mContext.getContentResolver(),
+                    Settings.System.START_SCREEN_STATE_SERVICE, 0, UserHandle.USER_CURRENT) != 0) {
+                Intent screenstate = new Intent(mContext, com.android.systemui.aosip.screenstate.ScreenStateService.class);
+                mContext.startService(screenstate);
             }
 
         } catch (Exception e) {
