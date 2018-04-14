@@ -32,6 +32,9 @@ import android.content.ContentResolver;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.content.res.ColorStateList;
+import android.content.ContentResolver;
+import android.content.res.Configuration;
+import android.database.ContentObserver;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -40,6 +43,8 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.UserHandle;
 import android.os.Handler;
 import android.os.IRemoteCallback;
 import android.os.RemoteException;
@@ -444,6 +449,7 @@ public class RecentsView extends FrameLayout {
         });
         updateClearRecentsFabTint();
         super.onAttachedToWindow();
+        mSettingsObserver.observe();
     }
 
     @Override
@@ -1172,6 +1178,8 @@ public class RecentsView extends FrameLayout {
              ContentResolver resolver = mContext.getContentResolver();
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.SHOW_CLEAR_ALL_RECENTS), false, this, UserHandle.USER_ALL);
+             resolver.registerContentObserver(Settings.System.getUriFor(
+                     Settings.System.RECENTS_LAYOUT_STYLE), false, this, UserHandle.USER_ALL);
              update();
          }
 
@@ -1182,6 +1190,12 @@ public class RecentsView extends FrameLayout {
 
          @Override
          public void onChange(boolean selfChange, Uri uri) {
+            if (uri.equals(Settings.System.getUriFor(
+                     Settings.System.RECENTS_LAYOUT_STYLE))) {
+                try {
+                mTaskStackView.reloadOnConfigurationChange();
+                } catch (Exception e) {}
+             }
              update();
          }
 

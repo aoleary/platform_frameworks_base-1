@@ -59,6 +59,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Slog;
@@ -264,6 +265,11 @@ class RecentTasks {
                 Slog.w(TAG, "Could not load application info for recents component: " + cn);
             }
         }
+    }
+
+    private boolean isPieRecentsEnabled() {
+       return Settings.System.getInt(mService.mContext.getContentResolver(),
+                      Settings.System.RECENTS_LAYOUT_STYLE, 0) == 0;
     }
 
     /**

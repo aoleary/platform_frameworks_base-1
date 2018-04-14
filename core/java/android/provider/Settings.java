@@ -5308,9 +5308,12 @@ public final class Settings {
          * Which component to use for Recents UI
          * 0 - Pie Recents (Quickstep)
          * 1 - Oreo Recents (SystemUI)
+         * 2 - Grid Recents (SystemUI)
+         * 3 - Android Go Recents (SystemUI)
          * @hide
          */
-        public static final String RECENTS_COMPONENT = "recents_component";
+        public static final String RECENTS_LAYOUT_STYLE  = "recents_layout_style";
+
         /** @hide */
         public static final Validator RECENTS_COMPONENT_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 1);
@@ -5483,7 +5486,6 @@ public final class Settings {
             QS_TILE_HIDE_TITLE,
             QS_QUICKBAR_COLUMNS,
             RECENTS_CLEAR_ALL_LOCATION,
-            RECENTS_COMPONENT,
             SCREENSHOT_DEFAULT_MODE,
             SCREENSHOT_SHUTTER_SOUND,
             SCREENRECORD_QUALITY_MODE,
@@ -5642,7 +5644,6 @@ public final class Settings {
             PUBLIC_SETTINGS.add(QS_SMART_PULLDOWN);
             PUBLIC_SETTINGS.add(QS_TILE_HIDE_TITLE);
             PUBLIC_SETTINGS.add(RECENTS_CLEAR_ALL_LOCATION);
-            PUBLIC_SETTINGS.add(RECENTS_COMPONENT);
             PUBLIC_SETTINGS.add(SCREENSHOT_DEFAULT_MODE);
             PUBLIC_SETTINGS.add(SCREENSHOT_SHUTTER_SOUND);
             PUBLIC_SETTINGS.add(SCREENRECORD_QUALITY_MODE);
@@ -5883,7 +5884,6 @@ public final class Settings {
             VALIDATORS.put(QS_SMART_PULLDOWN, QS_SMART_PULLDOWN_VALIDATOR);
             VALIDATORS.put(QS_TILE_HIDE_TITLE, QS_TILE_HIDE_TITLE_VALIDATOR);
             VALIDATORS.put(RECENTS_CLEAR_ALL_LOCATION, RECENTS_CLEAR_ALL_LOCATION_VALIDATOR);
-            VALIDATORS.put(RECENTS_COMPONENT,RECENTS_COMPONENT_VALIDATOR);
             VALIDATORS.put(SCREENSHOT_DEFAULT_MODE, SCREENSHOT_DEFAULT_MODE_VALIDATOR);
             VALIDATORS.put(SCREENRECORD_QUALITY_MODE, SCREENRECORD_QUALITY_MODE_VALIDATOR);
             VALIDATORS.put(SCREENSHOT_SHUTTER_SOUND, SCREENSHOT_SHUTTER_SOUND_VALIDATOR);
@@ -5920,7 +5920,6 @@ public final class Settings {
             VALIDATORS.put(VOLUME_KEY_CURSOR_CONTROL, VOLUME_KEY_CURSOR_CONTROL_VALIDATOR);
             VALIDATORS.put(VOLUME_ROCKER_WAKE, VOLUME_ROCKER_WAKE_VALIDATOR);
             VALIDATORS.put(WAKE_WHEN_PLUGGED_OR_UNPLUGGED, WAKE_WHEN_PLUGGED_OR_UNPLUGGED_VALIDATOR);
-            VALIDATORS.put(RECENTS_COMPONENT,RECENTS_COMPONENT_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_LIGHT_PULSE, BOOLEAN_VALIDATOR);
             VALIDATORS.put(DOZE_ON_CHARGE, DOZE_ON_CHARGE_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_LOGO, STATUS_BAR_LOGO_VALIDATOR);

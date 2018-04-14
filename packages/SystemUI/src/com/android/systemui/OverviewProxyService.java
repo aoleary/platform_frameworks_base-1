@@ -30,6 +30,7 @@ import android.os.Looper;
 import android.os.PatternMatcher;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.SurfaceControl;
 
@@ -276,6 +277,11 @@ public class OverviewProxyService implements CallbackController<OverviewProxyLis
             filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
             mContext.registerReceiver(mLauncherStateChangedReceiver, filter);
         }
+    }
+
+    private boolean isPieRecentsEnabled() {
+       return Settings.System.getInt(mContext.getContentResolver(),
+                      Settings.System.RECENTS_LAYOUT_STYLE, 0) == 0;
     }
 
     public void startConnectionToCurrentUser() {

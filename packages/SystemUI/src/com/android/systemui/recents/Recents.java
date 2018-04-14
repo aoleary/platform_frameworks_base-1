@@ -276,7 +276,7 @@ public class Recents extends SystemUI
         mTrustManager = (TrustManager) mContext.getSystemService(Context.TRUST_SERVICE);
 
         mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
-                Settings.System.RECENTS_COMPONENT), false,
+                Settings.System.RECENTS_LAYOUT_STYLE), false,
                 mRecentsComponentObserver, UserHandle.USER_ALL);
         updateRecentsComponent();
 
@@ -933,7 +933,7 @@ public class Recents extends SystemUI
 
     private void updateRecentsComponent() {
         mUsingPieRecents = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.RECENTS_COMPONENT, 0) == 0;
+                Settings.System.RECENTS_LAYOUT_STYLE, 0) == 0;
     }
 
     @Override
