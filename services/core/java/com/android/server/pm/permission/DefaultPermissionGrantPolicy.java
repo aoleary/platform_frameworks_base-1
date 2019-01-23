@@ -900,6 +900,14 @@ public final class DefaultPermissionGrantPolicy {
             grantRuntimePermissions(googlemarkupPackage, STORAGE_PERMISSIONS, userId);
         }
 
+        // Google dialer
+        PackageParser.Package googledialerPackage = getSystemPackage("com.google.android.dialer");
+        if (googledialerPackage != null && doesPackageSupportRuntimePermissions(googledialerPackage)) {
+            grantRuntimePermissions(googledialerPackage, PHONE_PERMISSIONS, userId);
+            grantRuntimePermissions(googledialerPackage, CONTACTS_PERMISSIONS, userId);
+            grantRuntimePermissions(googledialerPackage, SMS_PERMISSIONS, userId);
+        }
+
         // Google sound picker
         PackageParser.Package googleSoundPackage = getSystemPackage("com.google.android.soundpicker");
         if (googleSoundPackage != null) {
