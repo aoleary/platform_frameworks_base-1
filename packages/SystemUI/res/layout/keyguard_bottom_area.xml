@@ -34,13 +34,14 @@
         android:layout_gravity="bottom|center_horizontal"
         android:orientation="vertical">
 
-        <aosip.support.lottie.LottieAnimationView
+        <bootleggers.support.lottie.LottieAnimationView
             android:id="@+id/charging_indication"
             android:layout_width="@dimen/keyguard_charging_indication_width"
             android:layout_height="@dimen/keyguard_charging_indication_height"
             android:layout_gravity="center"
             android:clickable="false"
             app:lottie_fileName="keyguard_charging_indication.json"
+            app:lottie_loop="true"
             android:visibility="gone" />
 
         <com.android.systemui.statusbar.phone.KeyguardIndicationTextView
