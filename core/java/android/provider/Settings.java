@@ -4618,6 +4618,14 @@ public final class Settings {
         public static final String QS_TILE_STYLE = "qs_tile_style";
 
         /**
+         * 0 - Default
+         * 1 - MD2
+         * 2 - OnePlus
+         * @hide
+         */
+        public static final String SWITCH_STYLER = "switch_styler";
+
+        /**
          * Show four g instead of LTE
          * @hide
          */
