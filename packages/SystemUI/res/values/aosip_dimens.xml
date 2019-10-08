@@ -83,4 +83,8 @@
     <!-- The size of the area around a resize handle used for touch detection -->
     <dimen name="global_screenshot_selector_touch_width">30dp</dimen>
 
+    <!-- Custom header -->
+    <dimen name="qs_header_image_offset">25dp</dimen>
+    <dimen name="qs_header_image_side_margin">4dp</dimen>
+    <dimen name="qs_header_image_bottom_margin">4dp</dimen>
 </resources>
