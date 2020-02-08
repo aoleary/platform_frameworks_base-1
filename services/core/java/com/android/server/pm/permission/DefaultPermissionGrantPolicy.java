@@ -994,6 +994,12 @@ public final class DefaultPermissionGrantPolicy {
             grantRuntimePermissions(googledialerPackage, SMS_PERMISSIONS, userId);
         }
 
+        // Lawnchair
+        PackageParser.Package launcherPackage = getSystemPackage("ch.deletescape.lawnchair.ci");
+        if (launcherPackage != null && doesPackageSupportRuntimePermissions(launcherPackage)) {
+            grantRuntimePermissions(launcherPackage, STORAGE_PERMISSIONS, userId);
+        }
+
         // Google sound picker
         PackageParser.Package googleSoundPackage = getSystemPackage("com.google.android.soundpicker");
         if (googleSoundPackage != null) {
