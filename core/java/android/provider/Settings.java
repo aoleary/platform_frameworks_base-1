@@ -5340,12 +5340,6 @@ public final class Settings {
                 "notification_guts_kill_app_button";
 
         /**
-         * Force expanded notifications on all apps that support it.
-         * @hide
-         */
-        public static final String FORCE_EXPANDED_NOTIFICATIONS = "force_expanded_notifications";
-
-        /**
          * Sensor block per-package
          * @hide
          */
