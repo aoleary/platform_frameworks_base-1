@@ -19,7 +19,6 @@ package com.android.internal.statusbar;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
 import android.os.RemoteException;
-import android.util.Log;
 
 public class ThemeAccentUtils {
 
@@ -79,12 +78,6 @@ public class ThemeAccentUtils {
         "com.android.systemui.qstile.dottedcircle", // 7
         "com.android.systemui.qstile.shishuink", // 8
         "com.android.systemui.qstile.attemptmountain", // 9
-    };
-
-    private static final String[] SWITCH_STYLER = {
-        "com.android.system.switch.stock", // 0
-        "com.android.system.switch.md2", // 1
-        "com.android.system.switch.oneplus", // 2
     };
 
     // Unloads the stock dark theme
@@ -198,33 +191,5 @@ public class ThemeAccentUtils {
             e.printStackTrace();
         }
         return themeInfo != null && themeInfo.isEnabled();
-    }
-
-    // Changes system switch to user selected style.
-    public static void updateSwitchStyle(IOverlayManager om, int userId, int switchStyle) {
-        if (switchStyle == 0) {
-            stockSwitchStyle(om, userId);
-        } else {
-            try {
-                om.setEnabled(SWITCH_STYLER[switchStyle],
-                        true, userId);
-            } catch (RemoteException e) {
-                Log.w(TAG, "Can't change system switch style", e);
-            }
-        }
-    }
-
-    // Changes system switches back to stock.
-    public static void stockSwitchStyle(IOverlayManager om, int userId) {
-        // skip index 0
-        for (int i = 1; i < SWITCH_STYLER.length; i++) {
-            String switchtheme = SWITCH_STYLER[i];
-            try {
-                om.setEnabled(switchtheme,
-                        false /*disable*/, userId);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }
