@@ -105,8 +105,6 @@ import com.android.systemui.volume.VolumeComponent;
 import com.android.systemui.statusbar.phone.StatusBar;
 
 import com.google.android.systemui.statusbar.phone.StatusBarGoogle;
-import com.google.android.systemui.statusbar.phone.WallpaperNotifier;
-import com.google.android.systemui.smartspace.SmartSpaceController;
 
 import java.util.Optional;
 import java.util.concurrent.Executor;
@@ -124,8 +122,6 @@ public interface StatusBarGoogleModule {
     @Provides
     @Singleton
     static StatusBar provideStatusBar(
-            SmartSpaceController smartSpaceController,
-            WallpaperNotifier wallpaperNotifier,
             Context context,
             NotificationsController notificationsController,
             LightBarController lightBarController,
@@ -207,8 +203,6 @@ public interface StatusBarGoogleModule {
             FlashlightController flashlightController,
             TaskHelper taskHelper) {
         return new StatusBarGoogle(
-                smartSpaceController,
-                wallpaperNotifier,
                 context,
                 notificationsController,
                 lightBarController,
