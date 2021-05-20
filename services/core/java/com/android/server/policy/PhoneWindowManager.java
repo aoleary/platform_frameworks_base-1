@@ -898,6 +898,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     };
     private final List<DeviceKeyHandler> mDeviceKeyHandlers = new ArrayList<>();
+    private boolean mLockNowPending = false;
 
     private static final int MSG_ENABLE_POINTER_LOCATION = 1;
     private static final int MSG_DISABLE_POINTER_LOCATION = 2;
@@ -8535,6 +8536,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     mKeyguardDelegate.doKeyguardTimeout(options);
                 }
                 mLockScreenTimerActive = false;
+                mLockNowPending = false;
                 options = null;
             }
         }
@@ -8544,7 +8546,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
     }
 
-    ScreenLockTimeout mScreenLockTimeout = new ScreenLockTimeout();
+    final ScreenLockTimeout mScreenLockTimeout = new ScreenLockTimeout();
 
     @Override
     public void lockNow(Bundle options) {
@@ -8556,10 +8558,17 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             mScreenLockTimeout.setLockOptions(options);
         }
         mHandler.post(mScreenLockTimeout);
+        synchronized (mScreenLockTimeout) {
+            mLockNowPending = true;
+        }
     }
 
     private void updateLockScreenTimeout() {
         synchronized (mScreenLockTimeout) {
+            if (mLockNowPending) {
+                Log.w(TAG, "lockNow pending, ignore updating lockscreen timeout");
+                return;
+            }
             boolean enable = (mAllowLockscreenWhenOn && mAwake &&
                     mKeyguardDelegate != null && mKeyguardDelegate.isSecure(mCurrentUserId));
             if (mLockScreenTimerActive != enable) {
